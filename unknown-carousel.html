@@ -474,7 +474,7 @@
                               o = r.querySelectorAll(".unknown-carousel_dot"),
                               e = r.querySelector(".unknown-carousel_dot-line"),
                               i = 0; i < o.length; )
-                    i === parseInt(t) ? o[t].classList.add("active") : o[i].classList.remove("active"),
+                    i === parseInt(t) ? o[t].classList.add("active") : o[i].classList.removechild("active"),
                             i++;
                 if (e && this.items() < this.getTotalItems())
                     return e.style.transform = "translateX(" + t + "00%)"
@@ -484,7 +484,7 @@
                 if (r = this,
                                 i = 1,
                         "false" !== r.getAttribute("controls") && (t === !0 || r.tpages !== this.items()))
-                    return r.querySelector(".unknown-carousel_controls") && r.querySelector(".unknown-carousel_controls").remove(),
+                    return r.querySelector(".unknown-carousel_controls") && r.querySelector(".unknown-carousel_controls").removechild(),
                             e = document.createElement("div"),
                             e.classList.add("unknown-carousel_controls"),
                             o = document.createElement("div"),
@@ -525,8 +525,8 @@
                                 e = s.querySelector(".unknown-carousel_controls_arrow-prev"),
                                 o = s.querySelector(".unknown-carousel_controls_arrow-next"),
                         !this._isLoop() && null !== o && null !== e)
-                    return this.getContainerPosition() > -.5 ? e.classList.add("unknown-carousel_controls_arrow--disabled") : e.classList.remove("unknown-carousel_controls_arrow--disabled"),
-                            this.getContainerPosition() < -(this.getTotalItems() - this.items() - 1) * i ? o.classList.add("unknown-carousel_controls_arrow--disabled") : o.classList.remove("unknown-carousel_controls_arrow--disabled")
+                    return this.getContainerPosition() > -.5 ? e.classList.add("unknown-carousel_controls_arrow--disabled") : e.classList.removechild("unknown-carousel_controls_arrow--disabled"),
+                            this.getContainerPosition() < -(this.getTotalItems() - this.items() - 1) * i ? o.classList.add("unknown-carousel_controls_arrow--disabled") : o.classList.removechild("unknown-carousel_controls_arrow--disabled")
             },
             _printDots: function(t) {
                 var e, o, i, r, s, n, a;
@@ -543,7 +543,7 @@
                             return;
                         a.tpages = this.items()
                     }
-                    for (a.querySelector(".unknown-carousel_dots") && a.querySelector(".unknown-carousel_dots").remove(); n <= this.getTotalPages(); )
+                    for (a.querySelector(".unknown-carousel_dots") && a.querySelector(".unknown-carousel_dots").removechild(); n <= this.getTotalPages(); )
                         o = document.createElement("li"),
                                 o.classList.add("unknown-carousel_dot"),
                                 i = document.createElement("a"),
@@ -689,7 +689,7 @@
                             }
                             ,
                             e.length > 0 ? [].forEach.call(e, function(o, i) {
-                                if (o.remove(),
+                                if (o.removechild(),
                                         i === e.length - 1)
                                     return t()
                             }) : t(),
