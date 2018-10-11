@@ -689,7 +689,7 @@
                             }
                             ,
                             e.length > 0 ? [].forEach.call(e, function(o, i) {
-                                if (o.removechild(),
+                                if (o.parentNode.removeChild(o),
                                         i === e.length - 1)
                                     return t()
                             }) : t(),
