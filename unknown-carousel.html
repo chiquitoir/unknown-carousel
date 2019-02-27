@@ -12,7 +12,7 @@
         --dot-background-color:#ffffff;--dot-active-extra-item:hidden
       }
 
-      :host::content .unknown-carousel_wrapper {
+      :host::slotted() > .unknown-carousel_wrapper {
         text-align: center;
         position: relative;
         display: -webkit-flex;
@@ -40,7 +40,7 @@
         will-change: transform
       }
 
-      :host::content .unknown-carousel_controls {
+      :host::slotted() > .unknown-carousel_controls {
         position: absolute;
         width: auto;
         top: 50%;
@@ -53,17 +53,17 @@
         pointer-events: none
       }
 
-      :host::content [class*=unknown-carousel_controls_arrow] {
+      :host::slotted() > [class*=unknown-carousel_controls_arrow] {
         color: var(--dot-background-color);
         pointer-events: auto
       }
 
-      :host::content [class*=unknown-carousel_controls_arrow].unknown-carousel_controls_arrow--disabled {
+      :host::slotted() > [class*=unknown-carousel_controls_arrow].unknown-carousel_controls_arrow--disabled {
         pointer-events: none;
         cursor: default
       }
 
-      :host::content [class*=unknown-carousel_controls_arrow] iron-icon {
+      :host::slotted() > [class*=unknown-carousel_controls_arrow] iron-icon {
         opacity: var(--light-secondary-opacity);
         -webkit-filter: drop-shadow(0 0 1px rgba(0, 0, 0, .4));
         filter: drop-shadow(0 0 1px rgba(0, 0, 0, .4));
@@ -76,7 +76,7 @@
         transition: opacity .2s ease-out,filter .2s ease-out,transform .2s ease-out,-webkit-filter .2s ease-out,-webkit-transform .2s ease-out
       }
 
-      :host::content [class*=unknown-carousel_controls_arrow] iron-icon:hover {
+      :host::slotted() > [class*=unknown-carousel_controls_arrow] iron-icon:hover {
         opacity: var(--light-primary-opacity);
         -webkit-transform: scale(1.15);
         transform: scale(1.15);
@@ -84,15 +84,15 @@
         filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .4))
       }
 
-      :host::content .unknown-carousel_controls_arrow-next {
+      :host::slotted() > .unknown-carousel_controls_arrow-next {
         float: right
       }
 
-      :host::content .unknown-carousel_controls_arrow-prev {
+      :host::slotted() > .unknown-carousel_controls_arrow-prev {
           float: left
       }
 
-      :host::content .unknown-carousel_dots_wrapper {
+      :host::slotted() > .unknown-carousel_dots_wrapper {
         position: relative;
         display: inline-block;
         margin: 0;
@@ -100,7 +100,7 @@
         z-index: 2
       }
 
-      :host::content .unknown-carousel_dots {
+      :host::slotted() > .unknown-carousel_dots {
         position: absolute;
         width: 100%;
         text-align: center;
@@ -109,7 +109,7 @@
         pointer-events: none
       }
 
-      :host::content .unknown-carousel_dot-line {
+      :host::slotted() > .unknown-carousel_dot-line {
         visibility: var(--dot-active-extra-item);
         position: absolute;
         top: 0;
@@ -121,7 +121,7 @@
         transition: transform .2s ease-in-out,-webkit-transform .2s ease-in-out
       }
 
-      :host::content .unknown-carousel_dot-line::before {
+      :host::slotted() > .unknown-carousel_dot-line::before {
         content: '';
         display: block;
         width: 10px;
@@ -130,7 +130,7 @@
         border-radius: 10px
       }
 
-      :host::content .unknown-carousel_dot {
+      :host::slotted() > .unknown-carousel_dot {
         display: inline-block;
         pointer-events: auto;
         opacity: var(--light-secondary-opacity);
@@ -147,7 +147,7 @@
         backface-visibility: hidden
       }
 
-      :host::content .unknown-carousel_dot.active {
+      :host::slotted() > .unknown-carousel_dot.active {
         opacity: var(--light-primary-opacity);
         -webkit-filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .4));
         filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .4));
@@ -155,7 +155,7 @@
         transform: scale(1.15)
       }
 
-      :host::content .unknown-carousel_dot a {
+      :host::slotted() > .unknown-carousel_dot a {
         position: relative;
         display: block;
         padding: 6px;
@@ -166,7 +166,7 @@
         text-decoration: none
       }
 
-      :host::content .unknown-carousel_dot a::before {
+      :host::slotted() > .unknown-carousel_dot a::before {
         content: '';
         display: block;
         width: 8px;
@@ -175,12 +175,12 @@
         border-radius: 8px
       }
 
-      :host::content [class*=unknown-carousel-demo] {
+      :host::slotted() > [class*=unknown-carousel-demo] {
         position: relative;
         height: 400px
       }
 
-      :host::content [class*=unknown-carousel-demo]::before {
+      :host::slotted() > [class*=unknown-carousel-demo]::before {
         position: absolute;
         content: attr(data-text);
         color: var(--dot-background-color);
@@ -192,32 +192,32 @@
         transform: translate(-50%,-50%)
       }
 
-      :host::content .unknown-carousel-demo-indigo {
+      :host::slotted() > .unknown-carousel-demo-indigo {
         background-color: var(--unknown-indigo-500)
       }
 
-      :host::content .unknown-carousel-demo-pink {
+      :host::slotted() > .unknown-carousel-demo-pink {
         background-color: var(--unknown-pink-500)
       }
 
-      :host::content .unknown-carousel-demo-teal {
+      :host::slotted() > .unknown-carousel-demo-teal {
         background-color: var(--unknown-teal-500)
       }
 
-      :host::content .unknown-carousel-demo-amber {
+      :host::slotted() > .unknown-carousel-demo-amber {
         background-color: var(--unknown-amber-500)
       }
 
-      :host::content .unknown-carousel-demo-green {
+      :host::slotted() > .unknown-carousel-demo-green {
         background-color: var(--unknown-green-500)
       }
 
-      :host::content .unknown-carousel-demo-blue {
+      :host::slotted() > .unknown-carousel-demo-blue {
         background-color: var(--unknown-blue-500)
       }
     </style>
     <div class="unknown-carousel_wrapper">
-        <content></content>
+        <slot></slot>
     </div>
   </template>
     <script>
