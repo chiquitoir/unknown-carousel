@@ -2,6 +2,7 @@
 <link rel="import" href="../iron-icons/image-icons.html"/>
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html"/>
 <link rel="import" href="../paper-styles/color.html"/>
+<link rel="import" href="../../bower_components/import-lodash/import-lodash.html">
 <dom-module id="unknown-carousel">
   <template>
     <style>
@@ -279,7 +280,7 @@
             h = 0,
             s._isLoop()) {
 
-            for (a = n.getElementsByTagName("a"),
+            for (a = _.filter(n.getElementsByTagName("a"),function(a){return a.classList.contains("xxx")}),
               e = 0,
               i = a.length; e < i; e++)
               t = a[e],
@@ -297,7 +298,7 @@
           for (i = this,
             r = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             n = 0,
-            s = (r.getElementsByTagName("a").length > 0 ? r.getElementsByTagName("a") : Polymer.dom(i).querySelectorAll('.unknown-carousel_wrapper > div')),
+            s = (_.filter(r.getElementsByTagName("a"),function(a){return a.classList.contains("xxx")}).length > 0 ? _.filter(r.getElementsByTagName("a"),function(a){return a.classList.contains("xxx")}) : Polymer.dom(i).querySelectorAll('.unknown-carousel_wrapper > div')),
             e = 0,
             o = s.length; e < o; e++)
             t = s[e],
@@ -676,7 +677,7 @@
               t = function () {
                 var t;
                 return t = [],
-                  [].forEach.call(i.getElementsByTagName("a"), function (e, i) {
+                  [].forEach.call(_.filter(i.getElementsByTagName("a"),function(a){return a.classList.contains("xxx")}), function (e, i) {
                     var r;
                     if (i < o.items() && (r = e.cloneNode(true),
                       r.classList.add("cloned"),
