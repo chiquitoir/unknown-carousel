@@ -218,11 +218,7 @@
       }
     </style>
     <div class="unknown-carousel_wrapper">
-<<<<<<< Updated upstream
-        <slot></slot>
-=======
       <slot></slot>
->>>>>>> Stashed changes
     </div>
   </template>
   <script>
@@ -279,32 +275,33 @@
         getTotalItems: function () {
           var t, e, o, i, r, s, n, a, l, h;
           if (s = this,
-            n = s.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            n = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             h = 0,
-            s._isLoop())
-            for (a = n.children,
+            s._isLoop()) {
+
+            for (a = n.getElementsByTagName("a"),
               e = 0,
               i = a.length; e < i; e++)
               t = a[e],
-                "template" === t.localName || t.classList.contains("cloned") || h++;
+                "slot" === t.localName || t.classList.contains("cloned") || h++; }
           else
-            for (l = n.children,
-              o = 0,
-              r = l.length; o < r; o++)
-              t = l[o],
-                "template" !== t.localName && h++;
+              for (l = Polymer.dom(s).querySelectorAll('.unknown-carousel_wrapper > div'),
+                o = 0,
+                r = l.length; o < r; o++)
+                t = l[o],
+                  "template" !== t.localName && h++;
           return h
         },
         _getRealTotalItems: function () {
           var t, e, o, i, r, s, n;
           for (i = this,
-            r = i.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            r = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             n = 0,
-            s = r.children,
+            s = (r.getElementsByTagName("a").length > 0 ? r.getElementsByTagName("a") : Polymer.dom(i).querySelectorAll('.unknown-carousel_wrapper > div')),
             e = 0,
             o = s.length; e < o; e++)
             t = s[e],
-              "template" !== t.localName && n++;
+              "slot" !== t.localName && n++;
           return n
         },
         getPages: function () {
@@ -328,8 +325,8 @@
         getContainerPosition: function () {
           var t, e, o, i, r;
           return t = this,
-            e = t.shadowRoot.querySelector(".unknown-carousel_wrapper"),
-            o = e.style.transform,
+            e = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
+            o = e ? e.style.transform : '',
             r = 0,
             "" !== o && (i = o.match(/translateX\((.*)/)[0],
               r = i.match(/\((.*)\)/)[0],
@@ -359,9 +356,12 @@
             }
         },
         goToItem: function (t) {
+          if (isNaN(t)) {
+            t = 0;
+          }
           var e, o, i, r;
           return o = this,
-            i = o.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            i = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             this._isLoop() ? (e = Math.round(100 / this._getRealTotalItems() * 1e3) / 1e3,
               r = Math.round((t + this.itemsToPrepend.length) * -e * 1e3) / 1e3) : (e = Math.round(100 / this.getTotalItems() * 1e3) / 1e3,
                 r = Math.round(t * -e * 1e3) / 1e3),
@@ -373,7 +373,7 @@
         goToNextItem: function () {
           var t, e, o, i;
           if (o = this,
-            i = o.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            i = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             t = Math.round(100 / this.getTotalItems() * 1e3) / 1e3,
             e = Math.round(100 / this._getRealTotalItems() * 1e3) / 1e3,
             this._isLoop()) {
@@ -389,7 +389,7 @@
         goToPrevItem: function () {
           var t, e, o, i;
           if (o = this,
-            i = o.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            i = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             t = Math.round(100 / this.getTotalItems() * 1e3) / 1e3,
             e = Math.round(100 / this._getRealTotalItems() * 1e3) / 1e3,
             this._isLoop) {
@@ -420,11 +420,11 @@
         goToPage: function (t) {
           var e, o, i, r, s, n, a, l, h;
           return i = this,
-            r = i.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            r = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             e = Math.round(100 / this.getTotalItems() * 1e3) / 1e3,
             o = Math.round(100 / this._getRealTotalItems() * 1e3) / 1e3,
-            l = (this.items() - this.getPages()[t].length) * e,
-            h = (this.items() - this.getPages()[t].length) * o,
+            l = (this.items() - (this.getPages()[t] ? this.getPages()[t].length : 0)) * e,
+            h = (this.items() - (this.getPages()[t] ? this.getPages()[t].length : 0)) * o,
             n = -e * this.items(),
             a = -o * this.items(),
             s = this._isLoop() ? Math.round(1e3 * (t * a + h)) / 1e3 + a : Math.round(1e3 * (t * n + l)) / 1e3,
@@ -462,22 +462,22 @@
         _setContainerSize: function () {
           var t, e, o, i, r, s, n, a, l;
           for (s = this,
-            a = s.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            a = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             n = s.getBoundingClientRect(),
             o = this._isLoop() ? n.width * s._getRealTotalItems() / this.items() : n.width * s.getTotalItems() / this.items(),
             e = this._isLoop ? Math.round(100 / this._getRealTotalItems() * 1e4) / 1e4 : Math.round(100 / this.getTotalItems() * 1e4) / 1e4,
-            l = a.children,
+            l = a ? Polymer.dom(s).querySelectorAll('.unknown-carousel_wrapper > *') || [] : [],
             i = 0,
             r = l.length; i < r; i++)
             t = l[i],
               "template" !== t.localName && (t.style.width = e + "%");
-          return a.style.minWidth = o + "px"
+          return a ? a.style.minWidth = o + "px" : null
         },
         _setActiveDot: function (t) {
           var e, o, i, r;
           for (r = this,
-            o = r.shadowRoot.querySelectorAll(".unknown-carousel_dot"),
-            e = r.shadowRoot.querySelector(".unknown-carousel_dot-line"),
+            o = r.querySelectorAll(".unknown-carousel_dot"),
+            e = r.querySelector(".unknown-carousel_dot-line"),
             i = 0; i < o.length;)
             i === parseInt(t) ? o[t].classList.add("active") : o[i].classList.removechild("active"),
               i++;
@@ -489,7 +489,7 @@
           if (r = this,
             i = 1,
             "false" !== r.getAttribute("controls") && (t === !0 || r.tpages !== this.items()))
-            return r.shadowRoot.querySelector(".unknown-carousel_controls") && r.shadowRoot.querySelector(".unknown-carousel_controls").removechild(),
+            return r.querySelector(".unknown-carousel_controls") && r.querySelector(".unknown-carousel_controls").removechild(),
               e = document.createElement("div"),
               e.classList.add("unknown-carousel_controls"),
               o = document.createElement("div"),
@@ -527,8 +527,8 @@
           if (s = this,
             i = Math.round(100 / this.getTotalItems() * 1e3) / 1e3,
             r = Math.round(100 / this._getRealTotalItems() * 1e3) / 1e3,
-            e = s.shadowRoot.querySelector(".unknown-carousel_controls_arrow-prev"),
-            o = s.shadowRoot.querySelector(".unknown-carousel_controls_arrow-next"),
+            e = s.querySelector(".unknown-carousel_controls_arrow-prev"),
+            o = s.querySelector(".unknown-carousel_controls_arrow-next"),
             !this._isLoop() && null !== o && null !== e)
             return this.getContainerPosition() > -.5 ? e.classList.add("unknown-carousel_controls_arrow--disabled") : e.classList.removechild("unknown-carousel_controls_arrow--disabled"),
               this.getContainerPosition() < -(this.getTotalItems() - this.items() - 1) * i ? o.classList.add("unknown-carousel_controls_arrow--disabled") : o.classList.removechild("unknown-carousel_controls_arrow--disabled")
@@ -548,7 +548,7 @@
                 return;
               a.tpages = this.items()
             }
-            for (a.shadowRoot.querySelector(".unknown-carousel_dots") && a.shadowRoot.querySelector(".unknown-carousel_dots").removechild(); n <= this.getTotalPages();)
+            for (a.querySelector(".unknown-carousel_dots") && a.querySelector(".unknown-carousel_dots").removechild(); n <= this.getTotalPages();)
               o = document.createElement("li"),
                 o.classList.add("unknown-carousel_dot"),
                 i = document.createElement("a"),
@@ -579,7 +579,7 @@
         _getDragState: function (t) {
           var e, o, i, r, s, n, a, l, h, u, c, g, d, m, p, f, v, _, T;
           switch (u = this,
-          c = u.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+          c = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
           g = c.getBoundingClientRect(),
           d = Math.round(100 * t.detail.dx / g.width * 1e3) / 1e3,
           s = Math.round(100 / this.getTotalItems() * 1e3) / 1e3,
@@ -668,17 +668,17 @@
           var t, e, o, i, r;
           if (o = this,
             o._isLoop())
-            return i = o.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            return i = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
               r = 0,
               o.itemsToAppend = [],
               o.itemsToPrepend = [],
-              e = o.shadowRoot.querySelectorAll(".unknown-carousel_wrapper .cloned"),
+              e = Polymer.dom(this.root).querySelectorAll(".unknown-carousel_wrapper .cloned"),
               t = function () {
                 var t;
                 return t = [],
-                  [].forEach.call(i.children, function (e, i) {
+                  [].forEach.call(i.getElementsByTagName("a"), function (e, i) {
                     var r;
-                    if (i < o.items() && (r = e.cloneNode(!0),
+                    if (i < o.items() && (r = e.cloneNode(true),
                       r.classList.add("cloned"),
                       o.itemsToAppend.push(r)),
                       i >= o.getTotalItems() - o.items() && i <= o.getTotalItems())
@@ -726,17 +726,17 @@
         _onDrag: function () {
           var t, e;
           return t = this,
-            e = t.shadowRoot.querySelector(".unknown-carousel_wrapper"),
+            e = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
             t.listen(this.$$(".unknown-carousel_wrapper"), "track", "_getDragState"),
-            e.style.touchAction = ""
+            e ? e.style.touchAction = "" : null
         },
         _setInitialPosition: function () {
           var t, e;
           return t = this,
-            e = t.shadowRoot.querySelector(".unknown-carousel_wrapper"),
-            e.style.transition = "none",
+            e = Polymer.dom(this.root).querySelector(".unknown-carousel_wrapper"),
+            e ? e.style.transition = "none" : null,
             t.goToItem(0),
-            e.style.transition = "",
+            e ? e.style.transition = "" : null,
             t.initialize = !0
         },
         refresh: function () {
